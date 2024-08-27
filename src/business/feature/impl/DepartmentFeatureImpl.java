@@ -26,6 +26,8 @@ public class DepartmentFeatureImpl implements IDepartmentFeature
 			// chức năng cập nhật
 			departments.set(indexCheck, department);
 		}
+		// về sau mọi người làm việc với file thì cho nay sẽ được lưu vào file
+		
 	}
 	
 	@Override

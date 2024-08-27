@@ -1,6 +1,7 @@
 package business.entity;
 
 import business.feature.impl.DepartmentFeatureImpl;
+import business.utils.Message;
 
 import java.util.Scanner;
 
@@ -70,15 +71,22 @@ public class Department
 			}
 			else
 			{
-				boolean isExist = DepartmentFeatureImpl.departments.stream()
-						  .anyMatch(item -> item.getDepartmentId().equals(depId));
-				if (isExist)
+				if (depId.matches("^D\\w{3}$"))
 				{
-					System.err.println("Đã tồn tại mã phòng ban");
+					boolean isExist = DepartmentFeatureImpl.departments.stream()
+							  .anyMatch(item -> item.getDepartmentId().equals(depId));
+					if (isExist)
+					{
+						System.err.println("Đã tồn tại mã phòng ban");
+					}
+					else
+					{
+						return depId;
+					}
 				}
 				else
 				{
-					return depId;
+					System.err.println("Mã phòng ban không khớp DXXX");
 				}
 			}
 		}
@@ -93,11 +101,41 @@ public class Department
 			String depName = sc.nextLine();
 			if (depName.isBlank())
 			{
-				System.err.println("Không được để trống");
+				System.err.println(Message.ERROR_EMPTY);
 			}
 			else
 			{
 				return depName;
+			}
+		}
+		while (true);
+	}
+	
+	public String inputDepNameUpdate(Scanner sc)
+	{
+		// tên cũ là this.departmentName
+		// tên mới thì nhập vào
+		
+		System.out.println("Nhập vào tên mới (tên cũ: " + this.departmentName + "): ");
+		do
+		{
+			String depName = sc.nextLine();
+			if (depName.equals(this.departmentName))
+			{
+				return depName;
+			}
+			else
+			{
+				boolean isExist = DepartmentFeatureImpl.departments.stream()
+						  .anyMatch(item -> item.getDepartmentName().equals(depName));
+				if (isExist)
+				{
+					System.err.println("Tên phòng ban đã tồn tại");
+				}
+				else
+				{
+					return depName;
+				}
 			}
 		}
 		while (true);
