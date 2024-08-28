@@ -10,12 +10,12 @@ public class Main
 		do
 		{
 			System.out.println("""
-					      ======================= MENU =======================
-					         1. Quản lý phòng ban
-					         2. Quản lý nhân sự
-					         3. Thoát
-					      ====================================================
-					      Lựa chọn đê:
+					  				======================= MENU =======================
+					  							1. Quản lý phòng ban
+					  							2. Quản lý nhân sự
+					  							3. Thoát
+					  				====================================================
+					  				Lựa chọn đê:
 					  """);
 			int choice = Integer.parseInt(sc.nextLine());
 			switch (choice)

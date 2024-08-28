@@ -19,16 +19,16 @@ public class DepartmentManage
 		do
 		{
 			System.out.println("""
-					      ======================= MENU =======================
-					         1. Hiển thị danh sách phòng ban
-					         2. Thêm mới phòng ban
-					         3. Sửa tên phòng ban
-					         4. Hiển thị nhân viên theo mã phòng ban
-					         5. Xóa phòng ban
-					         6. Quay lại
-					      ====================================================
-					      Lựa chọn đê:
-					  """);
+											======================= MENU =======================
+														1. Hiển thị danh sách phòng ban
+														2. Thêm mới phòng ban
+														3. Sửa tên phòng ban
+														4. Hiển thị nhân viên theo mã phòng ban
+														5. Xóa phòng ban
+														6. Quay lại
+											====================================================
+											Lựa chọn đê:
+							""");
 			int choice = Integer.parseInt(sc.nextLine());
 			switch (choice)
 			{

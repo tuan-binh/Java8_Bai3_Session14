@@ -3,9 +3,10 @@ package business.entity;
 import business.feature.impl.DepartmentFeatureImpl;
 import business.utils.Message;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Department
+public class Department implements Serializable
 {
 	private String departmentId;
 	private String departmentName;

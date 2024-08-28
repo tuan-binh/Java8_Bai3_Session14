@@ -3,13 +3,14 @@ package business.feature.impl;
 import business.entity.Department;
 import business.entity.Employee;
 import business.feature.IDepartmentFeature;
+import business.utils.IOFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentFeatureImpl implements IDepartmentFeature
 {
-	public static List<Department> departments = new ArrayList<>();
+	public static List<Department> departments = IOFile.readObjectFromFile(IOFile.PATH_DEPARTMENT);
 	
 	@Override
 	public void addOrUpdate(Department department)
@@ -27,13 +28,14 @@ public class DepartmentFeatureImpl implements IDepartmentFeature
 			departments.set(indexCheck, department);
 		}
 		// về sau mọi người làm việc với file thì cho nay sẽ được lưu vào file
-		
+		IOFile.writeObjectToFile(departments, IOFile.PATH_DEPARTMENT);
 	}
 	
 	@Override
 	public void delete(String id)
 	{
 		departments.remove(findIndexById(id));
+		IOFile.writeObjectToFile(departments, IOFile.PATH_DEPARTMENT);
 	}
 	
 	@Override
