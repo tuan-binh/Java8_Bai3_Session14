@@ -3,12 +3,13 @@ package business.entity;
 import business.feature.impl.DepartmentFeatureImpl;
 import business.feature.impl.EmployeeFeatureImpl;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class Employee
+public class Employee implements Serializable
 {
 	private String employeeId;
 	private String employeeName;

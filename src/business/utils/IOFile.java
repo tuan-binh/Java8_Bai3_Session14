@@ -4,71 +4,30 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IOFile
+public class IOFile<T>
 {
-	public static String PATH_DEPARTMENT = "./src/business/data/department.txt";
 	
-	public static <T> void writeObjectToFile(List<T> list, String path)
+	
+	public List<T> readFromFile(String path)
 	{
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		// khởi tạo arrayList
+		List<T> list = new ArrayList<>();
 		try
 		{
-			File file = new File(path);
-			if (!file.exists())
-			{
-				file.createNewFile();
-			}
-			
-			fos = new FileOutputStream(file);
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(list);
+			fis = new FileInputStream(path);
+			ois = new ObjectInputStream(fis);
+			list = (List<T>) ois.readObject();
+//			return (List<T>) ois.readObject();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		finally
+		catch (ClassNotFoundException e)
 		{
-			try
-			{
-				if (fos != null)
-				{
-					fos.close();
-				}
-				if (oos != null)
-				{
-					oos.close();
-				}
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public static <T> List<T> readObjectFromFile(String path)
-	{
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		List<T> list = new ArrayList<>();
-		try
-		{
-			File file = new File(path);
-			if (!file.exists())
-			{
-				file.createNewFile();
-			}
-			
-			fis = new FileInputStream(file);
-			ois = new ObjectInputStream(fis);
-			
-			list = (List<T>) ois.readObject();
-		}
-		catch (IOException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		finally
 		{
@@ -90,4 +49,18 @@ public class IOFile
 		}
 		return list;
 	}
+	
+	// write - ghi To - đến File - tệp tin
+	public void writeToFile(List<T> list, String path)
+	{
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path)))
+		{
+			oos.writeObject(list);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 }
